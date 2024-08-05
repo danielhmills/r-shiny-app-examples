@@ -6,14 +6,14 @@ library(RJDBC)
 
 # Define UI
 ui <- fluidPage(
-  titlePanel("SPARQL Data Viewer"),
+  titlePanel("SQL Data Viewer"),
   mainPanel(
     tableOutput("sparqlTable")
   )
 )
 
 # Define server logic for JDBC
-server_jdbc <- function(input, output) {
+server <- function(input, output) {
   # Initialize Java
   .jinit()
   
@@ -40,9 +40,6 @@ server_jdbc <- function(input, output) {
     data
   })
 }
-
-# Choose the appropriate server function based on your connection method
-server <- server_jdbc
 
 # Run the application
 shinyApp(ui = ui, server = server)

@@ -1,13 +1,11 @@
 install.packages("shiny")
-install.packages("httr")
-install.packages("readr")
-
+install.packages("RODBC")
 
 library(shiny)
 
 # Define UI
 ui <- fluidPage(
-  titlePanel("SPARQL Data Viewer"),
+  titlePanel("SQL Data Viewer"),
   mainPanel(
     tableOutput("sparqlTable")
   )
@@ -16,8 +14,8 @@ ui <- fluidPage(
 library(RODBC)
 
 # Define server logic for ODBC
-server_odbc <- function(input, output) {
-  # ODBC DSN
+server <- function(input, output) {
+  # Add Your ODBC DSN Here
   dsn <- "Demo DB"
   username <- 'demo'
   password <- 'demo'
@@ -25,8 +23,8 @@ server_odbc <- function(input, output) {
   # Connect to the ODBC DSN
   conn <- odbcConnect(dsn, uid = username, pwd = password)
   
-  # SPARQL query
-  query <- "SPARQL SELECT * FROM <urn:analytics> WHERE { ?s ?p ?o. }"
+  # SQL query
+  query <- "SELECT TOP 10 FintAccountNumber, PrimaryAccountHolderID, Balance FROM Demo.fint.account ORDER BY Balance DESC"
   
   # Execute the query
   data <- sqlQuery(conn, query)
@@ -39,11 +37,6 @@ server_odbc <- function(input, output) {
     data
   })
 }
-
-# Choose the appropriate server function based on your connection method
- server <- server_odbc
-
-# server <- server_odbc  # for ODBC connection
 
 # Run the application
 shinyApp(ui = ui, server = server)
