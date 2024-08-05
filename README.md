@@ -2,9 +2,9 @@
 
 Example templates for creating [Shiny](https://shiny.posit.co) Applications with Virtuoso as a data source.
 
-SQL Query Examples are available in the `sql` Directory
+SQL Query Examples are available in the `sql` directory.
 
-SPARQL Examples are available in the `sparql`
+SPARQL Examples are available in the `sparql` directory.
 
 ## Note for SPARQL users: 
 
